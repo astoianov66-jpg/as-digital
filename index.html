@@ -14,633 +14,143 @@
     --white: #ffffff;
     --gray: #888888;
     --gray2: #444444;
-    --accent: #e8e8e8;
     --gold: #c9a96e;
     --gold2: #a07840;
   }
-
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
   html { scroll-behavior: smooth; }
-
   body {
-    background: var(--bg);
-    color: var(--white);
-    font-family: 'DM Sans', sans-serif;
-    font-weight: 300;
-    overflow-x: hidden;
-    cursor: none;
+    background: var(--bg); color: var(--white);
+    font-family: 'DM Sans', sans-serif; font-weight: 300;
+    overflow-x: hidden; cursor: none;
   }
-
-  /* CUSTOM CURSOR */
   .cursor {
-    width: 8px; height: 8px;
-    background: var(--gold);
-    border-radius: 50%;
-    position: fixed;
-    pointer-events: none;
-    z-index: 9999;
-    transition: transform 0.15s ease;
+    width: 8px; height: 8px; background: var(--gold); border-radius: 50%;
+    position: fixed; pointer-events: none; z-index: 9999;
     transform: translate(-50%, -50%);
   }
   .cursor-ring {
-    width: 36px; height: 36px;
-    border: 1px solid rgba(201,169,110,0.4);
-    border-radius: 50%;
-    position: fixed;
-    pointer-events: none;
-    z-index: 9998;
-    transition: all 0.12s ease;
-    transform: translate(-50%, -50%);
+    width: 36px; height: 36px; border: 1px solid rgba(201,169,110,0.4); border-radius: 50%;
+    position: fixed; pointer-events: none; z-index: 9998;
+    transition: all 0.12s ease; transform: translate(-50%, -50%);
   }
-
-  /* NOISE OVERLAY */
   body::before {
-    content: '';
-    position: fixed;
-    inset: 0;
+    content: ''; position: fixed; inset: 0;
     background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
-    pointer-events: none;
-    z-index: 0;
-    opacity: 0.5;
+    pointer-events: none; z-index: 0; opacity: 0.5;
   }
-
-  /* NAV */
   nav {
-    position: fixed;
-    top: 0; left: 0; right: 0;
-    z-index: 100;
-    padding: 24px 60px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    border-bottom: 1px solid transparent;
-    transition: all 0.4s ease;
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    padding: 24px 60px; display: flex; justify-content: space-between; align-items: center;
+    border-bottom: 1px solid transparent; transition: all 0.4s ease;
   }
-  nav.scrolled {
-    background: rgba(8,8,8,0.92);
-    backdrop-filter: blur(20px);
-    border-bottom-color: var(--border);
-  }
-  .logo {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 28px;
-    letter-spacing: 4px;
-    color: var(--white);
-    text-decoration: none;
-  }
+  nav.scrolled { background: rgba(8,8,8,0.92); backdrop-filter: blur(20px); border-bottom-color: var(--border); }
+  .logo { font-family: 'Bebas Neue', sans-serif; font-size: 28px; letter-spacing: 4px; color: var(--white); text-decoration: none; }
   .logo span { color: var(--gold); }
-  nav ul {
-    list-style: none;
-    display: flex;
-    gap: 48px;
-  }
-  nav ul a {
-    color: var(--gray);
-    text-decoration: none;
-    font-size: 13px;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    font-family: 'DM Mono', monospace;
-    transition: color 0.3s;
-  }
+  nav ul { list-style: none; display: flex; gap: 48px; }
+  nav ul a { color: var(--gray); text-decoration: none; font-size: 13px; letter-spacing: 2px; text-transform: uppercase; font-family: 'DM Mono', monospace; transition: color 0.3s; }
   nav ul a:hover { color: var(--white); }
-  .nav-cta {
-    background: transparent;
-    border: 1px solid var(--gold2);
-    color: var(--gold) !important;
-    padding: 10px 24px;
-    transition: all 0.3s !important;
-  }
-  .nav-cta:hover {
-    background: var(--gold) !important;
-    color: var(--bg) !important;
-  }
-
-  /* HERO */
-  #hero {
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    padding: 0 60px;
-    position: relative;
-    overflow: hidden;
-  }
-  .hero-grid {
-    position: absolute;
-    inset: 0;
-    background-image:
-      linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px);
-    background-size: 80px 80px;
-    mask-image: radial-gradient(ellipse at 60% 40%, black 30%, transparent 80%);
-  }
-  .hero-glow {
-    position: absolute;
-    width: 600px; height: 600px;
-    background: radial-gradient(circle, rgba(201,169,110,0.06) 0%, transparent 70%);
-    top: 50%; right: 10%;
-    transform: translateY(-50%);
-    pointer-events: none;
-  }
-  .hero-tag {
-    font-family: 'DM Mono', monospace;
-    font-size: 12px;
-    letter-spacing: 4px;
-    color: var(--gold);
-    text-transform: uppercase;
-    margin-bottom: 32px;
-    opacity: 0;
-    animation: fadeUp 0.8s ease 0.2s forwards;
-  }
-  .hero-tag::before {
-    content: '//';
-    margin-right: 10px;
-    opacity: 0.5;
-  }
-  h1 {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: clamp(72px, 10vw, 160px);
-    line-height: 0.9;
-    letter-spacing: 2px;
-    margin-bottom: 40px;
-    opacity: 0;
-    animation: fadeUp 0.8s ease 0.4s forwards;
-  }
-  h1 .line2 {
-    display: block;
-    color: transparent;
-    -webkit-text-stroke: 1px rgba(255,255,255,0.3);
-  }
+  .nav-cta { background: transparent; border: 1px solid var(--gold2); color: var(--gold) !important; padding: 10px 24px; transition: all 0.3s !important; }
+  .nav-cta:hover { background: var(--gold) !important; color: var(--bg) !important; }
+  #hero { min-height: 100vh; display: flex; flex-direction: column; justify-content: center; padding: 0 60px; position: relative; overflow: hidden; }
+  .hero-grid { position: absolute; inset: 0; background-image: linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px); background-size: 80px 80px; mask-image: radial-gradient(ellipse at 60% 40%, black 30%, transparent 80%); }
+  .hero-glow { position: absolute; width: 600px; height: 600px; background: radial-gradient(circle, rgba(201,169,110,0.06) 0%, transparent 70%); top: 50%; right: 10%; transform: translateY(-50%); pointer-events: none; }
+  .hero-tag { font-family: 'DM Mono', monospace; font-size: 12px; letter-spacing: 4px; color: var(--gold); text-transform: uppercase; margin-bottom: 32px; opacity: 0; animation: fadeUp 0.8s ease 0.2s forwards; }
+  .hero-tag::before { content: '//'; margin-right: 10px; opacity: 0.5; }
+  h1 { font-family: 'Bebas Neue', sans-serif; font-size: clamp(72px, 10vw, 160px); line-height: 0.9; letter-spacing: 2px; margin-bottom: 40px; opacity: 0; animation: fadeUp 0.8s ease 0.4s forwards; }
+  h1 .line2 { display: block; color: transparent; -webkit-text-stroke: 1px rgba(255,255,255,0.3); }
   h1 .accent { color: var(--gold); }
-  .hero-sub {
-    max-width: 480px;
-    font-size: 16px;
-    line-height: 1.8;
-    color: var(--gray);
-    margin-bottom: 56px;
-    opacity: 0;
-    animation: fadeUp 0.8s ease 0.6s forwards;
-  }
-  .hero-btns {
-    display: flex;
-    gap: 20px;
-    opacity: 0;
-    animation: fadeUp 0.8s ease 0.8s forwards;
-  }
-  .btn-primary {
-    background: var(--gold);
-    color: var(--bg);
-    padding: 16px 40px;
-    font-family: 'DM Mono', monospace;
-    font-size: 13px;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    text-decoration: none;
-    border: none;
-    cursor: none;
-    transition: all 0.3s;
-    position: relative;
-    overflow: hidden;
-  }
-  .btn-primary::after {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: rgba(255,255,255,0.15);
-    transform: translateX(-100%);
-    transition: transform 0.3s;
-  }
+  .hero-sub { max-width: 480px; font-size: 16px; line-height: 1.8; color: var(--gray); margin-bottom: 56px; opacity: 0; animation: fadeUp 0.8s ease 0.6s forwards; }
+  .hero-btns { display: flex; gap: 20px; opacity: 0; animation: fadeUp 0.8s ease 0.8s forwards; }
+  .btn-primary { background: var(--gold); color: var(--bg); padding: 16px 40px; font-family: 'DM Mono', monospace; font-size: 13px; letter-spacing: 2px; text-transform: uppercase; text-decoration: none; cursor: none; transition: all 0.3s; position: relative; overflow: hidden; display: inline-block; }
+  .btn-primary::after { content: ''; position: absolute; inset: 0; background: rgba(255,255,255,0.15); transform: translateX(-100%); transition: transform 0.3s; }
   .btn-primary:hover::after { transform: translateX(0); }
-  .btn-secondary {
-    border: 1px solid var(--border);
-    color: var(--gray);
-    padding: 16px 40px;
-    font-family: 'DM Mono', monospace;
-    font-size: 13px;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    text-decoration: none;
-    cursor: none;
-    transition: all 0.3s;
-  }
+  .btn-secondary { border: 1px solid var(--border); color: var(--gray); padding: 16px 40px; font-family: 'DM Mono', monospace; font-size: 13px; letter-spacing: 2px; text-transform: uppercase; text-decoration: none; cursor: none; transition: all 0.3s; }
   .btn-secondary:hover { border-color: var(--gray2); color: var(--white); }
-
-  .hero-stats {
-    position: absolute;
-    bottom: 60px;
-    right: 60px;
-    display: flex;
-    gap: 60px;
-    opacity: 0;
-    animation: fadeUp 0.8s ease 1s forwards;
-  }
-  .stat-num {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 48px;
-    color: var(--white);
-    line-height: 1;
-  }
+  .hero-stats { position: absolute; bottom: 60px; right: 60px; display: flex; gap: 60px; opacity: 0; animation: fadeUp 0.8s ease 1s forwards; }
+  .stat-num { font-family: 'Bebas Neue', sans-serif; font-size: 48px; color: var(--white); line-height: 1; }
   .stat-num span { color: var(--gold); }
-  .stat-label {
-    font-size: 11px;
-    letter-spacing: 2px;
-    color: var(--gray);
-    text-transform: uppercase;
-    font-family: 'DM Mono', monospace;
-    margin-top: 4px;
-  }
-
-  .scroll-indicator {
-    position: absolute;
-    bottom: 60px;
-    left: 60px;
-    display: flex;
-    align-items: center;
-    gap: 16px;
-    opacity: 0;
-    animation: fadeUp 0.8s ease 1.2s forwards;
-  }
-  .scroll-line {
-    width: 40px;
-    height: 1px;
-    background: var(--gray2);
-    position: relative;
-    overflow: hidden;
-  }
-  .scroll-line::after {
-    content: '';
-    position: absolute;
-    top: 0; left: -100%;
-    width: 100%; height: 100%;
-    background: var(--gold);
-    animation: scrollLine 2s ease infinite;
-  }
-  @keyframes scrollLine {
-    to { left: 100%; }
-  }
-  .scroll-text {
-    font-family: 'DM Mono', monospace;
-    font-size: 11px;
-    letter-spacing: 3px;
-    color: var(--gray2);
-    text-transform: uppercase;
-  }
-
-  /* MARQUEE */
-  .marquee-section {
-    border-top: 1px solid var(--border);
-    border-bottom: 1px solid var(--border);
-    padding: 20px 0;
-    overflow: hidden;
-    background: var(--bg2);
-  }
-  .marquee-track {
-    display: flex;
-    gap: 60px;
-    animation: marquee 20s linear infinite;
-    white-space: nowrap;
-  }
-  .marquee-item {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 16px;
-    letter-spacing: 6px;
-    color: var(--gray2);
-    text-transform: uppercase;
-    display: flex;
-    align-items: center;
-    gap: 20px;
-    flex-shrink: 0;
-  }
+  .stat-label { font-size: 11px; letter-spacing: 2px; color: var(--gray); text-transform: uppercase; font-family: 'DM Mono', monospace; margin-top: 4px; }
+  .scroll-indicator { position: absolute; bottom: 60px; left: 60px; display: flex; align-items: center; gap: 16px; opacity: 0; animation: fadeUp 0.8s ease 1.2s forwards; }
+  .scroll-line { width: 40px; height: 1px; background: var(--gray2); position: relative; overflow: hidden; }
+  .scroll-line::after { content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 100%; background: var(--gold); animation: scrollLine 2s ease infinite; }
+  @keyframes scrollLine { to { left: 100%; } }
+  .scroll-text { font-family: 'DM Mono', monospace; font-size: 11px; letter-spacing: 3px; color: var(--gray2); text-transform: uppercase; }
+  .marquee-section { border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); padding: 20px 0; overflow: hidden; background: var(--bg2); }
+  .marquee-track { display: flex; gap: 60px; animation: marquee 20s linear infinite; white-space: nowrap; }
+  .marquee-item { font-family: 'Bebas Neue', sans-serif; font-size: 16px; letter-spacing: 6px; color: var(--gray2); text-transform: uppercase; display: flex; align-items: center; gap: 20px; flex-shrink: 0; }
   .marquee-dot { color: var(--gold); font-size: 20px; }
-  @keyframes marquee {
-    from { transform: translateX(0); }
-    to { transform: translateX(-50%); }
-  }
-
-  /* SERVICES */
-  #services {
-    padding: 140px 60px;
-    position: relative;
-  }
-  .section-label {
-    font-family: 'DM Mono', monospace;
-    font-size: 11px;
-    letter-spacing: 4px;
-    color: var(--gold);
-    text-transform: uppercase;
-    margin-bottom: 20px;
-  }
+  @keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+  #services { padding: 140px 60px; position: relative; }
+  .section-label { font-family: 'DM Mono', monospace; font-size: 11px; letter-spacing: 4px; color: var(--gold); text-transform: uppercase; margin-bottom: 20px; }
   .section-label::before { content: '01 — '; opacity: 0.5; }
-  h2 {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: clamp(48px, 6vw, 90px);
-    line-height: 1;
-    margin-bottom: 80px;
-    letter-spacing: 2px;
-  }
-  .services-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 1px;
-    background: var(--border);
-    border: 1px solid var(--border);
-  }
-  .service-card {
-    background: var(--bg);
-    padding: 48px 40px;
-    transition: background 0.3s;
-    position: relative;
-    overflow: hidden;
-  }
-  .service-card::before {
-    content: '';
-    position: absolute;
-    top: 0; left: 0;
-    width: 100%; height: 2px;
-    background: var(--gold);
-    transform: scaleX(0);
-    transform-origin: left;
-    transition: transform 0.4s ease;
-  }
+  h2 { font-family: 'Bebas Neue', sans-serif; font-size: clamp(48px, 6vw, 90px); line-height: 1; margin-bottom: 80px; letter-spacing: 2px; }
+  .services-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--border); border: 1px solid var(--border); }
+  .service-card { background: var(--bg); padding: 48px 40px; transition: background 0.3s; position: relative; overflow: hidden; display: flex; flex-direction: column; }
+  .service-card::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 2px; background: var(--gold); transform: scaleX(0); transform-origin: left; transition: transform 0.4s ease; }
   .service-card:hover { background: var(--bg3); }
   .service-card:hover::before { transform: scaleX(1); }
-  .service-num {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 64px;
-    color: var(--border);
-    line-height: 1;
-    margin-bottom: 24px;
-    transition: color 0.3s;
-  }
+  .service-num { font-family: 'Bebas Neue', sans-serif; font-size: 64px; color: var(--border); line-height: 1; margin-bottom: 24px; transition: color 0.3s; }
   .service-card:hover .service-num { color: rgba(201,169,110,0.15); }
-  .service-title {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 28px;
-    letter-spacing: 2px;
-    margin-bottom: 16px;
-  }
-  .service-desc {
-    font-size: 14px;
-    line-height: 1.8;
-    color: var(--gray);
-    margin-bottom: 32px;
-  }
-  .service-price {
-    font-family: 'DM Mono', monospace;
-    font-size: 13px;
-    color: var(--gold);
-    letter-spacing: 1px;
-  }
-  .service-price span {
-    font-size: 11px;
-    color: var(--gray2);
-    display: block;
-    margin-top: 4px;
-    letter-spacing: 2px;
-  }
-
-  /* PROCESS */
-  #process {
-    padding: 140px 60px;
-    background: var(--bg2);
-    border-top: 1px solid var(--border);
-  }
+  .service-title { font-family: 'Bebas Neue', sans-serif; font-size: 28px; letter-spacing: 2px; margin-bottom: 16px; }
+  .service-desc { font-size: 14px; line-height: 1.8; color: var(--gray); margin-bottom: 24px; flex-grow: 1; }
+  .service-price { font-family: 'DM Mono', monospace; font-size: 13px; color: var(--gold); letter-spacing: 1px; margin-bottom: 24px; }
+  .service-price span { font-size: 11px; color: var(--gray2); display: block; margin-top: 4px; letter-spacing: 2px; }
+  .service-btn { background: transparent; border: 1px solid var(--gold2); color: var(--gold); padding: 14px 28px; font-family: 'DM Mono', monospace; font-size: 12px; letter-spacing: 2px; text-transform: uppercase; text-decoration: none; cursor: none; transition: all 0.3s; text-align: center; display: block; }
+  .service-btn:hover { background: var(--gold); color: var(--bg); }
+  #process { padding: 140px 60px; background: var(--bg2); border-top: 1px solid var(--border); }
   #process .section-label::before { content: '02 — '; }
-  .process-steps {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 40px;
-    margin-top: 80px;
-  }
-  .process-step {
-    position: relative;
-  }
-  .process-step:not(:last-child)::after {
-    content: '→';
-    position: absolute;
-    right: -24px;
-    top: 8px;
-    color: var(--gray2);
-    font-size: 20px;
-  }
-  .step-num {
-    font-family: 'DM Mono', monospace;
-    font-size: 11px;
-    color: var(--gold);
-    letter-spacing: 3px;
-    margin-bottom: 24px;
-  }
-  .step-title {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 22px;
-    letter-spacing: 2px;
-    margin-bottom: 12px;
-  }
-  .step-desc {
-    font-size: 13px;
-    line-height: 1.8;
-    color: var(--gray);
-  }
-
-  /* FOREX SECTION */
-  #forex {
-    padding: 140px 60px;
-    position: relative;
-    overflow: hidden;
-  }
+  .process-steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 40px; margin-top: 80px; }
+  .process-step { position: relative; }
+  .process-step:not(:last-child)::after { content: '→'; position: absolute; right: -24px; top: 8px; color: var(--gray2); font-size: 20px; }
+  .step-num { font-family: 'DM Mono', monospace; font-size: 11px; color: var(--gold); letter-spacing: 3px; margin-bottom: 24px; }
+  .step-title { font-family: 'Bebas Neue', sans-serif; font-size: 22px; letter-spacing: 2px; margin-bottom: 12px; }
+  .step-desc { font-size: 13px; line-height: 1.8; color: var(--gray); }
+  #forex { padding: 140px 60px; position: relative; overflow: hidden; }
   #forex .section-label::before { content: '03 — '; }
-  .forex-inner {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 80px;
-    align-items: center;
-  }
-  .forex-visual {
-    position: relative;
-    height: 400px;
-    border: 1px solid var(--border);
-    background: var(--bg2);
-    overflow: hidden;
-  }
-  .forex-visual-inner {
-    padding: 32px;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-  }
-  .ticker {
-    font-family: 'DM Mono', monospace;
-    font-size: 11px;
-    color: var(--gray2);
-    letter-spacing: 2px;
-  }
-  .chart-bars {
-    display: flex;
-    align-items: flex-end;
-    gap: 6px;
-    height: 120px;
-  }
-  .bar {
-    flex: 1;
-    background: var(--border);
-    position: relative;
-    transition: background 0.3s;
-  }
+  .forex-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
+  .forex-visual { position: relative; height: 400px; border: 1px solid var(--border); background: var(--bg2); overflow: hidden; }
+  .forex-visual-inner { padding: 32px; height: 100%; display: flex; flex-direction: column; justify-content: space-between; }
+  .ticker { font-family: 'DM Mono', monospace; font-size: 11px; color: var(--gray2); letter-spacing: 2px; }
+  .chart-bars { display: flex; align-items: flex-end; gap: 6px; height: 120px; }
+  .bar { flex: 1; background: var(--border); position: relative; transition: background 0.3s; }
   .bar.up { background: rgba(201,169,110,0.3); }
   .bar.down { background: rgba(255,255,255,0.05); }
-  .pair-row {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 12px 0;
-    border-bottom: 1px solid var(--border);
-  }
-  .pair-name {
-    font-family: 'DM Mono', monospace;
-    font-size: 13px;
-    color: var(--white);
-  }
+  .pair-row { display: flex; justify-content: space-between; align-items: center; padding: 12px 0; border-bottom: 1px solid var(--border); }
+  .pair-name { font-family: 'DM Mono', monospace; font-size: 13px; color: var(--white); }
   .pair-val { font-family: 'DM Mono', monospace; font-size: 13px; color: var(--gold); }
   .pair-change { font-family: 'DM Mono', monospace; font-size: 11px; color: #4ade80; }
   .forex-content h2 { margin-bottom: 24px; }
-  .forex-desc {
-    font-size: 15px;
-    line-height: 1.9;
-    color: var(--gray);
-    margin-bottom: 48px;
-  }
+  .forex-desc { font-size: 15px; line-height: 1.9; color: var(--gray); margin-bottom: 48px; }
   .forex-points { list-style: none; display: flex; flex-direction: column; gap: 16px; }
-  .forex-points li {
-    display: flex;
-    align-items: flex-start;
-    gap: 16px;
-    font-size: 14px;
-    color: var(--gray);
-    line-height: 1.6;
-  }
-  .forex-points li::before {
-    content: '→';
-    color: var(--gold);
-    flex-shrink: 0;
-    margin-top: 2px;
-  }
-
-  /* BOOKING */
-  #booking {
-    padding: 140px 60px;
-    background: var(--bg2);
-    border-top: 1px solid var(--border);
-    text-align: center;
-  }
+  .forex-points li { display: flex; align-items: flex-start; gap: 16px; font-size: 14px; color: var(--gray); line-height: 1.6; }
+  .forex-points li::before { content: '→'; color: var(--gold); flex-shrink: 0; margin-top: 2px; }
+  #booking { padding: 140px 60px; background: var(--bg2); border-top: 1px solid var(--border); text-align: center; }
   #booking .section-label::before { content: '04 — '; }
   #booking .section-label { text-align: center; }
   #booking h2 { text-align: center; margin-bottom: 24px; }
-  .booking-sub {
-    font-size: 16px;
-    color: var(--gray);
-    margin-bottom: 64px;
-    line-height: 1.8;
-    max-width: 500px;
-    margin-left: auto;
-    margin-right: auto;
-  }
-  .booking-cards {
-    display: flex;
-    gap: 1px;
-    background: var(--border);
-    border: 1px solid var(--border);
-    max-width: 800px;
-    margin: 0 auto 64px;
-  }
-  .booking-card {
-    flex: 1;
-    background: var(--bg);
-    padding: 40px 32px;
-    text-align: left;
-  }
-  .booking-icon {
-    font-size: 28px;
-    margin-bottom: 16px;
-  }
-  .booking-card-title {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 22px;
-    letter-spacing: 2px;
-    margin-bottom: 10px;
-  }
-  .booking-card-desc {
-    font-size: 13px;
-    color: var(--gray);
-    line-height: 1.7;
-  }
-
-  .cta-block {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 20px;
-  }
-  .cta-note {
-    font-family: 'DM Mono', monospace;
-    font-size: 11px;
-    color: var(--gray2);
-    letter-spacing: 2px;
-  }
-
-  /* FOOTER */
-  footer {
-    padding: 60px;
-    border-top: 1px solid var(--border);
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-  .footer-logo {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 24px;
-    letter-spacing: 4px;
-  }
+  .booking-sub { font-size: 16px; color: var(--gray); margin-bottom: 64px; line-height: 1.8; max-width: 500px; margin-left: auto; margin-right: auto; }
+  .booking-cards { display: flex; gap: 1px; background: var(--border); border: 1px solid var(--border); max-width: 800px; margin: 0 auto 64px; }
+  .booking-card { flex: 1; background: var(--bg); padding: 40px 32px; text-align: left; }
+  .booking-icon { font-size: 28px; margin-bottom: 16px; }
+  .booking-card-title { font-family: 'Bebas Neue', sans-serif; font-size: 22px; letter-spacing: 2px; margin-bottom: 10px; }
+  .booking-card-desc { font-size: 13px; color: var(--gray); line-height: 1.7; }
+  .cta-block { display: flex; flex-direction: column; align-items: center; gap: 20px; }
+  .cta-note { font-family: 'DM Mono', monospace; font-size: 11px; color: var(--gray2); letter-spacing: 2px; }
+  footer { padding: 60px; border-top: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; }
+  .footer-logo { font-family: 'Bebas Neue', sans-serif; font-size: 24px; letter-spacing: 4px; }
   .footer-logo span { color: var(--gold); }
-  .footer-copy {
-    font-family: 'DM Mono', monospace;
-    font-size: 11px;
-    color: var(--gray2);
-    letter-spacing: 2px;
-  }
-  .footer-links {
-    display: flex;
-    gap: 32px;
-  }
-  .footer-links a {
-    font-family: 'DM Mono', monospace;
-    font-size: 11px;
-    color: var(--gray2);
-    text-decoration: none;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    transition: color 0.3s;
-  }
+  .footer-copy { font-family: 'DM Mono', monospace; font-size: 11px; color: var(--gray2); letter-spacing: 2px; }
+  .footer-links { display: flex; gap: 32px; }
+  .footer-links a { font-family: 'DM Mono', monospace; font-size: 11px; color: var(--gray2); text-decoration: none; letter-spacing: 2px; text-transform: uppercase; transition: color 0.3s; }
   .footer-links a:hover { color: var(--white); }
-
-  /* ANIMATIONS */
-  @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(30px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
-  .reveal {
-    opacity: 0;
-    transform: translateY(40px);
-    transition: all 0.8s ease;
-  }
-  .reveal.visible {
-    opacity: 1;
-    transform: translateY(0);
-  }
-
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+  .reveal { opacity: 0; transform: translateY(40px); transition: all 0.8s ease; }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
   @media (max-width: 900px) {
+    body { cursor: auto; }
+    .cursor, .cursor-ring { display: none; }
+    .btn-primary, .btn-secondary, .service-btn { cursor: pointer; }
     nav { padding: 20px 24px; }
     nav ul { display: none; }
     #hero, #services, #process, #forex, #booking { padding-left: 24px; padding-right: 24px; }
@@ -660,7 +170,6 @@
 <div class="cursor" id="cursor"></div>
 <div class="cursor-ring" id="cursorRing"></div>
 
-<!-- NAV -->
 <nav id="nav">
   <a href="#" class="logo">AS<span>.</span>DIGITAL</a>
   <ul>
@@ -671,47 +180,24 @@
   </ul>
 </nav>
 
-<!-- HERO -->
 <section id="hero">
   <div class="hero-grid"></div>
   <div class="hero-glow"></div>
-
   <div class="hero-tag">AI-Powered Web Solutions</div>
-  <h1>
-    WE BUILD<br>
-    <span class="line2">INTELLIGENT</span>
-    <span class="accent"> WEBSITES</span>
-  </h1>
-  <p class="hero-sub">
-    Custom AI-powered websites for traders, brokers, and forward-thinking businesses. Built to convert. Designed to impress.
-  </p>
+  <h1>WE BUILD<br><span class="line2">INTELLIGENT</span><span class="accent"> WEBSITES</span></h1>
+  <p class="hero-sub">Custom AI-powered websites for traders, brokers, and forward-thinking businesses. Built to convert. Designed to impress.</p>
   <div class="hero-btns">
-    <a href="https://calendly.com/astoianov66/30min" target="_blank" class="btn-primary">Book Free Call</a>
-    <a href="#services" class="btn-secondary">View Services</a>
+    <a href="#services" class="btn-primary">View Packages</a>
+    <a href="#forex" class="btn-secondary">My Expertise</a>
   </div>
-
   <div class="hero-stats">
-    <div>
-      <div class="stat-num">48<span>H</span></div>
-      <div class="stat-label">Turnaround</div>
-    </div>
-    <div>
-      <div class="stat-num">€<span>0</span></div>
-      <div class="stat-label">Upfront Cost</div>
-    </div>
-    <div>
-      <div class="stat-num">100<span>%</span></div>
-      <div class="stat-label">Ownership</div>
-    </div>
+    <div><div class="stat-num">48<span>H</span></div><div class="stat-label">Turnaround</div></div>
+    <div><div class="stat-num">€<span>0</span></div><div class="stat-label">Upfront Cost</div></div>
+    <div><div class="stat-num">100<span>%</span></div><div class="stat-label">Ownership</div></div>
   </div>
-
-  <div class="scroll-indicator">
-    <div class="scroll-line"></div>
-    <span class="scroll-text">Scroll</span>
-  </div>
+  <div class="scroll-indicator"><div class="scroll-line"></div><span class="scroll-text">Scroll</span></div>
 </section>
 
-<!-- MARQUEE -->
 <div class="marquee-section">
   <div class="marquee-track">
     <span class="marquee-item"><span class="marquee-dot">✦</span> AI Chatbots</span>
@@ -729,114 +215,69 @@
   </div>
 </div>
 
-<!-- SERVICES -->
 <section id="services">
   <div class="section-label reveal">Services</div>
-  <h2 class="reveal">WHAT WE<br>BUILD</h2>
+  <h2 class="reveal">CHOOSE<br>YOUR PACKAGE</h2>
   <div class="services-grid">
     <div class="service-card reveal">
       <div class="service-num">01</div>
       <div class="service-title">AI Business Website</div>
       <p class="service-desc">A complete, professional website with AI chat assistant built-in. Your clients get instant answers 24/7 — even while you sleep.</p>
-      <div class="service-price">
-        From €800
-        <span>+ €80/mo maintenance</span>
-      </div>
+      <div class="service-price">From €800<span>+ €80/mo maintenance</span></div>
+      <a href="https://calendly.com/astoianov66/30min" target="_blank" class="service-btn">Book Discovery Call →</a>
     </div>
     <div class="service-card reveal">
       <div class="service-num">02</div>
-      <div class="service-title">Trader / Mentor Site</div>
+      <div class="service-title">Pro Trader Site</div>
       <p class="service-desc">Premium personal brand website for Forex traders, educators and mentors. Built to establish authority and convert followers into clients.</p>
-      <div class="service-price">
-        From €1,000
-        <span>+ €100/mo maintenance</span>
-      </div>
+      <div class="service-price">From €1,000<span>+ €100/mo maintenance</span></div>
+      <a href="https://calendly.com/astoianov66/pro-trader-site-discovery-call" target="_blank" class="service-btn">Book Discovery Call →</a>
     </div>
     <div class="service-card reveal">
       <div class="service-num">03</div>
       <div class="service-title">Full AI Platform</div>
       <p class="service-desc">Custom AI-powered platform — signal dashboards, member areas, automated analysis pages. Built for scale and performance.</p>
-      <div class="service-price">
-        From €2,500
-        <span>+ €200/mo maintenance</span>
-      </div>
+      <div class="service-price">From €2,500<span>+ €200/mo maintenance</span></div>
+      <a href="https://calendly.com/astoianov66/full-ai-platform-discovery-call" target="_blank" class="service-btn">Book Discovery Call →</a>
     </div>
   </div>
 </section>
 
-<!-- PROCESS -->
 <section id="process">
   <div class="section-label reveal">How It Works</div>
   <h2 class="reveal">THE<br>PROCESS</h2>
   <div class="process-steps">
-    <div class="process-step reveal">
-      <div class="step-num">STEP 01</div>
-      <div class="step-title">Discovery Call</div>
-      <p class="step-desc">We jump on a 30-minute video call. You tell me what you need — I tell you exactly what I'll build and for how much.</p>
-    </div>
-    <div class="process-step reveal">
-      <div class="step-num">STEP 02</div>
-      <div class="step-title">Design & Build</div>
-      <p class="step-desc">I design and develop your site with AI features integrated. You get progress updates throughout the build.</p>
-    </div>
-    <div class="process-step reveal">
-      <div class="step-num">STEP 03</div>
-      <div class="step-title">Review & Refine</div>
-      <p class="step-desc">You review everything. We refine until it's exactly right. Unlimited revisions until you're satisfied.</p>
-    </div>
-    <div class="process-step reveal">
-      <div class="step-num">STEP 04</div>
-      <div class="step-title">Launch & Own</div>
-      <p class="step-desc">We launch your site. You receive full ownership of the domain, code, and hosting. It's 100% yours.</p>
-    </div>
+    <div class="process-step reveal"><div class="step-num">STEP 01</div><div class="step-title">Discovery Call</div><p class="step-desc">We jump on a 30-minute video call. You tell me what you need — I tell you exactly what I'll build and for how much.</p></div>
+    <div class="process-step reveal"><div class="step-num">STEP 02</div><div class="step-title">Design & Build</div><p class="step-desc">I design and develop your site with AI features integrated. You get progress updates throughout the build.</p></div>
+    <div class="process-step reveal"><div class="step-num">STEP 03</div><div class="step-title">Review & Refine</div><p class="step-desc">You review everything. We refine until it's exactly right. Unlimited revisions until you're satisfied.</p></div>
+    <div class="process-step reveal"><div class="step-num">STEP 04</div><div class="step-title">Launch & Own</div><p class="step-desc">We launch your site. You receive full ownership of the domain, code, and hosting. It's 100% yours.</p></div>
   </div>
 </section>
 
-<!-- FOREX -->
 <section id="forex">
   <div class="forex-inner">
     <div class="forex-visual reveal">
       <div class="forex-visual-inner">
         <div class="ticker">LIVE MARKET — EUR/USD</div>
         <div class="chart-bars">
-          <div class="bar up" style="height:40%"></div>
-          <div class="bar up" style="height:55%"></div>
-          <div class="bar down" style="height:45%"></div>
-          <div class="bar up" style="height:70%"></div>
-          <div class="bar up" style="height:60%"></div>
-          <div class="bar down" style="height:50%"></div>
-          <div class="bar up" style="height:80%"></div>
-          <div class="bar up" style="height:90%"></div>
-          <div class="bar down" style="height:65%"></div>
-          <div class="bar up" style="height:75%"></div>
-          <div class="bar up" style="height:85%"></div>
-          <div class="bar down" style="height:60%"></div>
+          <div class="bar up" style="height:40%"></div><div class="bar up" style="height:55%"></div>
+          <div class="bar down" style="height:45%"></div><div class="bar up" style="height:70%"></div>
+          <div class="bar up" style="height:60%"></div><div class="bar down" style="height:50%"></div>
+          <div class="bar up" style="height:80%"></div><div class="bar up" style="height:90%"></div>
+          <div class="bar down" style="height:65%"></div><div class="bar up" style="height:75%"></div>
+          <div class="bar up" style="height:85%"></div><div class="bar down" style="height:60%"></div>
         </div>
         <div>
-          <div class="pair-row">
-            <span class="pair-name">EUR/USD</span>
-            <span class="pair-val">1.0842</span>
-            <span class="pair-change">+0.32%</span>
-          </div>
-          <div class="pair-row">
-            <span class="pair-name">GBP/USD</span>
-            <span class="pair-val">1.2651</span>
-            <span class="pair-change">+0.18%</span>
-          </div>
-          <div class="pair-row">
-            <span class="pair-name">US500</span>
-            <span class="pair-val">5,842.10</span>
-            <span class="pair-change">+0.54%</span>
-          </div>
+          <div class="pair-row"><span class="pair-name">EUR/USD</span><span class="pair-val">1.0842</span><span class="pair-change">+0.32%</span></div>
+          <div class="pair-row"><span class="pair-name">GBP/USD</span><span class="pair-val">1.2651</span><span class="pair-change">+0.18%</span></div>
+          <div class="pair-row"><span class="pair-name">US500</span><span class="pair-val">5,842.10</span><span class="pair-change">+0.54%</span></div>
         </div>
       </div>
     </div>
     <div class="forex-content reveal">
       <div class="section-label">Expertise</div>
       <h2>BUILT FOR<br>TRADERS</h2>
-      <p class="forex-desc">
-        I'm not just a developer — I'm a Forex and Index trader myself. I understand the market, the language, and what traders actually need from a digital presence.
-      </p>
+      <p class="forex-desc">I'm not just a developer — I'm a Forex and Index trader myself. I understand the market, the language, and what traders actually need from a digital presence.</p>
       <ul class="forex-points">
         <li>I speak your language — pips, spreads, drawdown, risk management</li>
         <li>I understand what trading educators and mentors need to convert audiences</li>
@@ -847,37 +288,21 @@
   </div>
 </section>
 
-<!-- BOOKING -->
 <section id="booking">
   <div class="section-label">Contact</div>
-  <h2>LET'S<br>TALK</h2>
-  <p class="booking-sub">Book a free 30-minute call. No pressure, no commitment — just an honest conversation about your project.</p>
-
+  <h2>NOT SURE<br>WHICH PACKAGE?</h2>
+  <p class="booking-sub">Book a free 30-minute discovery call. I'll help you figure out what's right for your business — no pressure, no commitment.</p>
   <div class="booking-cards reveal">
-    <div class="booking-card">
-      <div class="booking-icon">🎯</div>
-      <div class="booking-card-title">Free Consultation</div>
-      <p class="booking-card-desc">Tell me about your business and what you want to build. I'll give you a clear plan and exact quote.</p>
-    </div>
-    <div class="booking-card">
-      <div class="booking-icon">⚡</div>
-      <div class="booking-card-title">Fast Delivery</div>
-      <p class="booking-card-desc">Most projects are live within 48–72 hours of approval. No long waiting periods.</p>
-    </div>
-    <div class="booking-card">
-      <div class="booking-icon">🔑</div>
-      <div class="booking-card-title">Full Ownership</div>
-      <p class="booking-card-desc">After final payment, everything is yours — domain, code, hosting. No lock-in, ever.</p>
-    </div>
+    <div class="booking-card"><div class="booking-icon">🎯</div><div class="booking-card-title">Free Consultation</div><p class="booking-card-desc">Tell me about your business and what you want to build. I'll give you a clear plan and exact quote.</p></div>
+    <div class="booking-card"><div class="booking-icon">⚡</div><div class="booking-card-title">Fast Delivery</div><p class="booking-card-desc">Most projects are live within 48–72 hours of approval. No long waiting periods.</p></div>
+    <div class="booking-card"><div class="booking-icon">🔑</div><div class="booking-card-title">Full Ownership</div><p class="booking-card-desc">After final payment, everything is yours — domain, code, hosting. No lock-in, ever.</p></div>
   </div>
-
   <div class="cta-block reveal">
     <a href="https://calendly.com/astoianov66/30min" target="_blank" class="btn-primary">Book Your Free Call →</a>
     <span class="cta-note">30 min · Google Meet · No commitment</span>
   </div>
 </section>
 
-<!-- FOOTER -->
 <footer>
   <div class="footer-logo">AS<span>.</span>DIGITAL</div>
   <div class="footer-copy">© 2025 AS Digital. All rights reserved.</div>
@@ -889,7 +314,6 @@
 </footer>
 
 <script>
-  // Cursor
   const cursor = document.getElementById('cursor');
   const ring = document.getElementById('cursorRing');
   let mx = 0, my = 0, rx = 0, ry = 0;
@@ -906,20 +330,14 @@
     requestAnimationFrame(animRing);
   }
   animRing();
-
-  // Nav scroll
   const nav = document.getElementById('nav');
   window.addEventListener('scroll', () => {
     nav.classList.toggle('scrolled', window.scrollY > 50);
   });
-
-  // Reveal on scroll
   const reveals = document.querySelectorAll('.reveal');
   const observer = new IntersectionObserver(entries => {
     entries.forEach((e, i) => {
-      if (e.isIntersecting) {
-        setTimeout(() => e.target.classList.add('visible'), i * 80);
-      }
+      if (e.isIntersecting) setTimeout(() => e.target.classList.add('visible'), i * 80);
     });
   }, { threshold: 0.1 });
   reveals.forEach(r => observer.observe(r));
