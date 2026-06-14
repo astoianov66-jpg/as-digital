@@ -133,6 +133,26 @@
   .booking-card-desc { font-size: 13px; color: var(--gray); line-height: 1.7; }
   .cta-block { display: flex; flex-direction: column; align-items: center; gap: 20px; }
   .cta-note { font-family: 'DM Mono', monospace; font-size: 11px; color: var(--gray2); letter-spacing: 2px; }
+
+  /* CLIENTS SECTION */
+  #clients { padding: 140px 60px; border-top: 1px solid var(--border); }
+  #clients .section-label::before { content: '05 — '; }
+  #clients h2 { margin-bottom: 60px; }
+  .clients-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+  .browser-card { border: 1px solid var(--border); overflow: hidden; background: var(--bg2); transition: border-color 0.3s, transform 0.3s; cursor: none; }
+  .browser-card:hover { border-color: var(--gold2); transform: translateY(-4px); }
+  .browser-bar { display: flex; align-items: center; gap: 8px; padding: 10px 14px; background: var(--bg3); border-bottom: 1px solid var(--border); }
+  .browser-dots { display: flex; gap: 5px; }
+  .browser-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--gray2); }
+  .browser-url { flex: 1; background: var(--bg); border: 1px solid var(--border); padding: 3px 10px; font-family: 'DM Mono', monospace; font-size: 11px; color: var(--gray2); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .browser-preview { height: 200px; overflow: hidden; position: relative; }
+  .browser-preview iframe { width: 200%; height: 200%; transform: scale(0.5); transform-origin: top left; pointer-events: none; border: none; }
+  .browser-preview-placeholder { height: 200px; background: var(--bg3); display: flex; align-items: center; justify-content: center; border: 1px dashed var(--border); }
+  .browser-preview-placeholder span { font-family: 'DM Mono', monospace; font-size: 24px; color: var(--gray2); }
+  .browser-footer { padding: 14px 16px; display: flex; align-items: center; justify-content: space-between; border-top: 1px solid var(--border); }
+  .browser-name { font-family: 'Bebas Neue', sans-serif; font-size: 16px; letter-spacing: 2px; color: var(--white); }
+  .browser-tag { font-family: 'DM Mono', monospace; font-size: 10px; color: var(--gold); border: 1px solid var(--gold2); padding: 2px 8px; letter-spacing: 2px; text-transform: uppercase; }
+
   footer { padding: 60px; border-top: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; }
   .footer-logo { font-family: 'Bebas Neue', sans-serif; font-size: 24px; letter-spacing: 4px; }
   .footer-logo span { color: var(--gold); }
@@ -143,14 +163,14 @@
   @keyframes fadeUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
   .reveal { opacity: 0; transform: translateY(40px); transition: all 0.8s ease; }
   .reveal.visible { opacity: 1; transform: translateY(0); }
-  @media (max-width: 1100px) { .services-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 1100px) { .services-grid { grid-template-columns: repeat(2, 1fr); } .clients-grid { grid-template-columns: repeat(2, 1fr); } }
   @media (max-width: 900px) {
     body { cursor: auto; }
     .cursor, .cursor-ring { display: none; }
     .btn-primary, .btn-secondary, .service-btn { cursor: pointer; }
     nav { padding: 20px 24px; }
     nav ul { display: none; }
-    #hero, #services, #process, #why, #booking { padding-left: 24px; padding-right: 24px; }
+    #hero, #services, #process, #why, #booking, #clients { padding-left: 24px; padding-right: 24px; }
     .services-grid { grid-template-columns: 1fr; }
     .process-steps { grid-template-columns: 1fr 1fr; }
     .process-step::after { display: none; }
@@ -159,6 +179,7 @@
     .hero-stats { display: none; }
     footer { flex-direction: column; gap: 24px; text-align: center; }
     .booking-cards { flex-direction: column; }
+    .clients-grid { grid-template-columns: 1fr; }
   }
 </style>
 </head>
@@ -173,6 +194,7 @@
     <li><a href="#services">Services</a></li>
     <li><a href="#process">Process</a></li>
     <li><a href="#why">Why Us</a></li>
+    <li><a href="#clients">Work</a></li>
     <li><a href="#booking" class="nav-cta">Book a Call</a></li>
   </ul>
 </nav>
@@ -216,7 +238,6 @@
   <div class="section-label reveal">Services</div>
   <h2 class="reveal">CHOOSE<br>YOUR PACKAGE</h2>
   <div class="services-grid">
-
     <div class="service-card reveal">
       <div class="service-num">01</div>
       <div class="service-title">Website Refresh</div>
@@ -224,7 +245,6 @@
       <div class="service-price">From €250<span>3-5 day delivery</span></div>
       <a href="https://calendly.com/astoianov66/pro-trader-site-discovery-call" target="_blank" class="service-btn">Book Discovery Call →</a>
     </div>
-
     <div class="service-card reveal">
       <div class="service-num">02</div>
       <div class="service-title">Personal Site</div>
@@ -232,7 +252,6 @@
       <div class="service-price">From €500<span>5-7 day delivery</span></div>
       <a href="https://calendly.com/astoianov66/pro-trader-site-discovery-call" target="_blank" class="service-btn">Book Discovery Call →</a>
     </div>
-
     <div class="service-card reveal">
       <div class="service-num">03</div>
       <div class="service-title">AI Business Website</div>
@@ -240,7 +259,6 @@
       <div class="service-price">From €800<span>7-10 day delivery</span></div>
       <a href="https://calendly.com/astoianov66/pro-trader-site-discovery-call" target="_blank" class="service-btn">Book Discovery Call →</a>
     </div>
-
     <div class="service-card reveal">
       <div class="service-num">04</div>
       <div class="service-title">Full AI Platform</div>
@@ -248,7 +266,6 @@
       <div class="service-price">From €2,500<span>2-4 week delivery</span></div>
       <a href="https://calendly.com/astoianov66/pro-trader-site-discovery-call" target="_blank" class="service-btn">Book Discovery Call →</a>
     </div>
-
   </div>
 </section>
 
@@ -268,51 +285,38 @@
   <div class="section-label reveal">Why AS Digital</div>
   <h2 class="reveal">WHAT MAKES<br>US DIFFERENT</h2>
   <div class="why-grid">
-
     <div class="why-card reveal">
       <div class="why-icon-wrap">
-        <div class="why-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M7 14l4-4 4 4 5-5"/></svg>
-        </div>
+        <div class="why-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M7 14l4-4 4 4 5-5"/></svg></div>
         <div class="why-num">01</div>
       </div>
       <h3 class="why-title">Business-First Mindset</h3>
       <p class="why-desc">Built by someone with a background in financial markets and sales — not just a developer. Every design choice is made with one question: does this convert visitors into customers?</p>
     </div>
-
     <div class="why-card reveal">
       <div class="why-icon-wrap">
-        <div class="why-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
-        </div>
+        <div class="why-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></div>
         <div class="why-num">02</div>
       </div>
       <h3 class="why-title">Speed Without Compromise</h3>
       <p class="why-desc">Most projects are live within 3 to 10 days — not weeks or months. Powered by AI tools and modern workflows that keep delivery fast without sacrificing quality.</p>
     </div>
-
     <div class="why-card reveal">
       <div class="why-icon-wrap">
-        <div class="why-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
-        </div>
+        <div class="why-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg></div>
         <div class="why-num">03</div>
       </div>
       <h3 class="why-title">AI-Native From Day One</h3>
       <p class="why-desc">Every site we build is AI-ready from the start — chatbots, smart forms, automated content, and integrations that work 24/7. The future of websites, available today.</p>
     </div>
-
     <div class="why-card reveal">
       <div class="why-icon-wrap">
-        <div class="why-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M14 9l-5 6"/><path d="M14 15l-5-6"/></svg>
-        </div>
+        <div class="why-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M14 9l-5 6"/><path d="M14 15l-5-6"/></svg></div>
         <div class="why-num">04</div>
       </div>
       <h3 class="why-title">You Own Everything</h3>
       <p class="why-desc">No subscriptions, no lock-in, no hidden fees. After final payment, the website, code, design, and hosting are 100% yours. Move it, edit it, sell it — it's yours forever.</p>
     </div>
-
   </div>
 </section>
 
@@ -331,12 +335,64 @@
   </div>
 </section>
 
+<!-- CLIENTS SECTION -->
+<section id="clients">
+  <div class="section-label reveal">Our Work</div>
+  <h2 class="reveal">RECENT<br>PROJECTS</h2>
+  <div class="clients-grid">
+
+    <a href="https://www.streetburger.store" target="_blank" class="browser-card reveal" style="text-decoration:none;">
+      <div class="browser-bar">
+        <div class="browser-dots"><div class="browser-dot"></div><div class="browser-dot"></div><div class="browser-dot"></div></div>
+        <div class="browser-url">streetburger.store</div>
+      </div>
+      <div class="browser-preview">
+        <iframe src="https://www.streetburger.store" loading="lazy" title="Street Burger"></iframe>
+      </div>
+      <div class="browser-footer">
+        <span class="browser-name">Street Burger</span>
+        <span class="browser-tag">Restaurant</span>
+      </div>
+    </a>
+
+    <a href="https://miro-trans.vercel.app" target="_blank" class="browser-card reveal" style="text-decoration:none;">
+      <div class="browser-bar">
+        <div class="browser-dots"><div class="browser-dot"></div><div class="browser-dot"></div><div class="browser-dot"></div></div>
+        <div class="browser-url">miro-trans.vercel.app</div>
+      </div>
+      <div class="browser-preview">
+        <iframe src="https://miro-trans.vercel.app" loading="lazy" title="Miro Trans 86"></iframe>
+      </div>
+      <div class="browser-footer">
+        <span class="browser-name">Miro Trans 86</span>
+        <span class="browser-tag">Transport</span>
+      </div>
+    </a>
+
+    <div class="browser-card reveal" style="opacity:0.35;">
+      <div class="browser-bar">
+        <div class="browser-dots"><div class="browser-dot"></div><div class="browser-dot"></div><div class="browser-dot"></div></div>
+        <div class="browser-url">coming soon...</div>
+      </div>
+      <div class="browser-preview-placeholder">
+        <span>+</span>
+      </div>
+      <div class="browser-footer">
+        <span class="browser-name">Next Client</span>
+        <span class="browser-tag">In Progress</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
 <footer>
   <div class="footer-logo">AS<span>.</span>DIGITAL</div>
   <div class="footer-copy">© 2025 AS Digital. All rights reserved.</div>
   <div class="footer-links">
     <a href="#services">Services</a>
     <a href="#process">Process</a>
+    <a href="#clients">Work</a>
     <a href="https://calendly.com/astoianov66/pro-trader-site-discovery-call" target="_blank">Book Call</a>
   </div>
 </footer>
